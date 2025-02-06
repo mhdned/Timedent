@@ -1,0 +1,4 @@
+.venv
+
+./configs/envs/.env.prod
+__pycache__

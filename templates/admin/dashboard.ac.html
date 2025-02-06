@@ -1,0 +1,154 @@
+{% extends "layouts/admin.main.html" %} {% block title %} {% endblock %} {% block style %}
+<style></style>
+{% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row justify="center">
+    <v-col cols="12" sm="12" md="6">
+      <v-card class="mx-auto px-10" variant="outlined">
+        <v-card-title>
+          <h1>Add Field</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin">Enter field information in below form</h4>
+        </v-card-subtitle>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text>
+          <v-form method="POST" action="/course/available">
+            <v-select
+              clearable
+              label="Courses"
+              name="course_id"
+              :items="courses"
+              item-title="subject"
+              item-value="id"
+              variant="outlined"
+            ></v-select>
+            <v-select
+              clearable
+              label="Teacher"
+              name="teacher_id"
+              :items="teachers"
+              item-title="fullname"
+              item-value="id"
+              variant="outlined"
+            ></v-select>
+            <v-text-field
+              label="Capacity"
+              name="capacity"
+              required
+              variant="outlined"
+            ></v-text-field>
+            <v-text-field
+              name="start_date"
+              label="Start Date"
+              variant="outlined"
+              type="date"
+            ></v-text-field>
+            <v-text-field
+              name="end_date"
+              label="End Date"
+              variant="outlined"
+              type="date"
+            ></v-text-field>
+            <v-text-field
+              name="start_time"
+              label="Start Time"
+              variant="outlined"
+              type="time"
+            ></v-text-field>
+            <v-text-field
+              name="end_time"
+              label="End Time"
+              variant="outlined"
+              type="time"
+            ></v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                type="submit"
+                min-width="120"
+                color="primary"
+                size="large"
+                rounded="lg"
+                variant="tonal"
+                size="x-large"
+                >Add</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="12" md="6">
+      <v-card class="mx-auto" variant="outlined">
+        <v-card-title>
+          <h1>Courses List</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin">Available Courses List</h4>
+        </v-card-subtitle>
+        <v-card-text>
+          <v-data-table :headers="headers" :items="availables" :search="search">
+            <template v-slot:item.delete="{ item }">
+              <a
+                class="text-decoration-none"
+                color="error"
+                :href="`/course/available/delete/${item.id}`"
+              >
+                <v-btn icon="mdi-delete" variant="tonal" color="error" size="small"> </v-btn>
+              </a>
+            </template>
+            <template v-slot:item.update="{ item }">
+              <a
+                class="text-decoration-none"
+                color="error"
+                :href="`/course/available/update/${item.id}`"
+              >
+                <v-btn icon="mdi-circle-edit-outline" variant="tonal" color="primary" size="small">
+                </v-btn>
+              </a>
+            </template>
+          </v-data-table>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const { VDatePicker } = vuetify;
+  const drawer = ref(null);
+
+  const app = createApp({
+    data() {
+      return {
+        drawer: null,
+        model: null,
+        search: '',
+        headers: [
+          { key: 'id', title: 'Id' },
+          { key: 'course', title: 'Course' },
+          { key: 'teacher', title: 'Teacher' },
+          { key: 'capacity', title: 'Capacity' },
+          { key: 'start_date', title: 'S Date' },
+          { key: 'end_date', title: 'E Date' },
+          { key: 'start_time', title: 'S Time' },
+          { key: 'end_time', title: 'E Time' },
+          { text: 'delete', value: 'delete', sortable: false },
+          { text: 'update', value: 'update', sortable: false },
+        ],
+        courses: {{courses | tojson}},
+        teachers: {{teachers | tojson}},
+        availables: {{availables | tojson}},
+      };
+    },
+    components: {
+      VDatePicker, // Register VDatePicker component
+    },
+  });
+  app.use(vuetify);
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.mount('#app');
+</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layouts/auth.html" %} {% block title %} Home {% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row align="center" justify="center">
+    <v-col cols="12" sm="8" md="3">
+      <v-card variant="outlined" rounded="lg">
+        <v-card-title>
+          <h1>Client Register</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin">
+            Welcome! Please enter your information in below form.
+          </h4>
+        </v-card-subtitle>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text>
+          <v-form method="POST" actions="/auth/register">
+            <v-text-field
+              label="Email"
+              append-inner-icon="mdi-email"
+              name="email"
+              required
+              variant="outlined"
+            ></v-text-field>
+            <v-text-field
+              label="Username"
+              append-inner-icon="mdi-account"
+              name="username"
+              required
+              variant="outlined"
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              type="password"
+              append-inner-icon="mdi-lock"
+              name="password"
+              required
+              variant="outlined"
+            ></v-text-field>
+            <v-card-actions>
+              <v-div>
+                <p class="text-caption">Forgot your password?</p>
+                <a class="text-caption text-decoration-none text-primary" href="#"
+                  >Click here to reset it.</a
+                >
+              </v-div>
+              <v-spacer></v-spacer>
+              <v-btn
+                type="submit"
+                min-width="120"
+                color="primary"
+                size="large"
+                rounded="lg"
+                variant="tonal"
+                size="x-large"
+                >Login</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp } = Vue;
+  const app = createApp({});
+
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.use(vuetify);
+  app.mount('#app');
+</script>
+{% endblock %}

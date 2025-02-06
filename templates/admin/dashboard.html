@@ -1,0 +1,37 @@
+{% extends "layouts/admin.main.html" %} {% block title %} {% endblock %} {% block style %}
+<style></style>
+{% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row justify="center">
+    <v-col cols="12" sm="12" md="6">
+      <v-card class="mx-auto px-10" variant="outlined">
+        <v-card-title>
+          <h1>Statistics Website</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin"></h4>
+        </v-card-subtitle>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text> </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="12" md="6"> </v-col>
+  </v-row>
+</v-container>
+
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const drawer = ref(null);
+
+  const app = createApp({
+    data: () => {
+      return {
+        drawer: null,
+      };
+    },
+  }).use(vuetify);
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.mount('#app');
+</script>
+{% endblock %}

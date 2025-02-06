@@ -1,0 +1,26 @@
+{% extends "layouts/error.html" %} {% block title %} Home {% endblock %} {% block contents %}
+<v-container class="h-100 align-center justify-center align-content-center">
+  <v-row class="fill-height" align="center" justify="center">
+    <v-col class="text-center">
+      <h1 class="display-1 font-weight-bold mb-3 text-h2 font-weight-bold text-capitalize">
+        404 Not Found
+      </h1>
+      <h2 class="headline font-weight-regular mb-5 text-h6">
+        The page you are looking for cannot be found.
+      </h2>
+      <v-btn variant="outlined" color="background" href="/" size="large" rounded="sm"
+        >Go to Home</v-btn
+      >
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp } = Vue;
+  const app = createApp({});
+
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.use(vuetify);
+  app.mount('#app');
+</script>
+{% endblock %}

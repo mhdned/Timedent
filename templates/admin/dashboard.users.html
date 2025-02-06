@@ -1,0 +1,67 @@
+{% extends "layouts/admin.main.html" %} {% block title %} {% endblock %} {% block style %}
+<style>
+  .v-table__wrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .v-table__wrapper::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .v-table__wrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+</style>
+{% endblock %} {% block contents %}
+<v-container grid-list-md>
+  <v-text-field
+    v-model="search"
+    label="Search"
+    prepend-inner-icon="mdi-magnify"
+    variant="outlined"
+    hide-details
+    single-line
+  ></v-text-field>
+
+  <v-data-table :headers="headers" :items="users" :search="search">
+    <template v-slot:item.delete="{ item }">
+      <a class="text-decoration-none" color="error" :href="`/user/delete/${item.id}`">
+        <v-btn icon="mdi-delete" variant="tonal" color="error" size="small"> </v-btn>
+      </a>
+    </template>
+    <template v-slot:item.update="{ item }">
+      <a class="text-decoration-none" color="error" :href="`/user/update/${item.id}`">
+        <v-btn icon="mdi-circle-edit-outline" variant="tonal" color="primary" size="small"> </v-btn>
+      </a>
+    </template>
+  </v-data-table>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const drawer = ref(null);
+  const app = createApp({
+    data() {
+      return {
+        drawer: null,
+        search: '',
+        headers: [
+          {key : "id", title: "id"},
+          {key : "username", title: "username"},
+          {key : "email", title: "email"},
+          {key : "is_verified", title: "verified"},
+          {key : "created_at", title: "created at"},
+          {key : "updated_at", title: "updated at"},
+          { text: 'delete', value: 'delete', sortable: false },
+          { text: 'update', value: 'update', sortable: false }
+        ],
+        users : {{users | tojson}},
+      };
+    },
+  });
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.use(vuetify);
+  app.mount('#app');
+</script>
+{% endblock %}

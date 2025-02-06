@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TimeDent {{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/lib/vuetify.min.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.4.47/css/materialdesignicons.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-main class="bg-secondary"> {% block contents %}{% endblock %} </v-main>
+      </v-app>
+    </div>
+    <script src="{{ url_for('static', path='/lib/vue.global.js') }}"></script>
+    <script src="{{ url_for('static', path='/lib/vuetify.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

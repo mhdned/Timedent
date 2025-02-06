@@ -1,0 +1,114 @@
+{% extends "layouts/admin.main.html" %} {% block title %} {% endblock %} {% block style %}
+<style></style>
+{% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row align="center" justify="center">
+    <v-col cols="12" sm="8" md="5">
+      <v-card variant="outlined" rounded="lg">
+        <v-card-title>
+          <h1>Edit field</h1>
+        </v-card-title>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text>
+          <v-form method="POST" action="/course/available/update/{{available_course.id}}">
+            <v-select
+              clearable
+              label="Courses"
+              name="course_id"
+              :items="courses"
+              item-title="subject"
+              item-value="id"
+              variant="outlined"
+              v-model="selectedCourse"
+            ></v-select>
+            <v-select
+              clearable
+              label="Teacher"
+              name="teacher_id"
+              :items="teachers"
+              item-title="fullname"
+              item-value="id"
+              variant="outlined"
+              v-model="selectedTeacher"
+            ></v-select>
+            <v-text-field
+              label="Capacity"
+              name="capacity"
+              required
+              variant="outlined"
+              v-model="capacity"
+            ></v-text-field>
+            <v-text-field
+              name="start_date"
+              label="Start Date"
+              variant="outlined"
+              type="date"
+              v-model="available_course.start_date"
+            ></v-text-field>
+            <v-text-field
+              name="end_date"
+              label="End Date"
+              variant="outlined"
+              type="date"
+              v-model="available_course.end_date"
+            ></v-text-field>
+            <v-text-field
+              name="start_time"
+              label="Start Time"
+              variant="outlined"
+              type="time"
+              v-model="available_course.start_time"
+            ></v-text-field>
+            <v-text-field
+              name="end_time"
+              label="End Time"
+              variant="outlined"
+              type="time"
+              v-model="available_course.end_time"
+            ></v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                type="submit"
+                min-width="120"
+                color="primary"
+                size="large"
+                rounded="lg"
+                variant="tonal"
+                size="x-large"
+                >Edit</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const drawer = ref(null);
+
+  const app = createApp({
+    data() {
+      return {
+        available_course : {
+          start_date : {{available_course.start_date | tojson}},
+          end_date : {{available_course.end_date | tojson}},
+          start_time : {{available_course.start_time | tojson}},
+          end_time : {{available_course.end_time | tojson}}
+        },
+        capacity: {{available_course.capacity | tojson}},
+        courses: {{courses | tojson}},
+        teachers: {{teachers | tojson}},
+        selectedCourse: {{ available_course.course_id  | tojson}},
+        selectedTeacher: {{ available_course.teacher_id  | tojson}}
+      };
+    },
+  });
+  app.use(vuetify);
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.mount('#app');
+</script>
+{% endblock %}

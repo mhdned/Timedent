@@ -1,0 +1,32 @@
+{% extends "layouts/landing.html" %} {% block title %} Home {% endblock %} {% block contents %}
+
+<v-container class="h-100 align-center justify-center align-content-center">
+  <v-row class="justify-center">
+    <h1 class="text-h1">TimeDent</h1>
+  </v-row>
+  <v-row class="justify-center pt-2">
+    <h5 class="text-subtitle-1">
+      TimeDent is a management software and assistant in choosing students courses
+    </h5>
+  </v-row>
+  <v-row class="justify-center pt-5">
+    <a class="text-decoration-none" href="/auth/register"
+      ><v-btn variant="outlined" class="mx-2 text-decoration-none" color="background"
+        >Register</v-btn
+      ></a
+    >
+    <a class="text-decoration-none" href="/auth/login"
+      ><v-btn variant="outlined" class="mx-2 text-decoration-none" color="background"
+        >Login</v-btn
+      ></a
+    >
+  </v-row>
+</v-container>
+
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp } = Vue;
+  const app = createApp({}).use(vuetify);
+  app.mount('#app');
+</script>
+{% endblock %}

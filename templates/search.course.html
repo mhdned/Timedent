@@ -1,0 +1,84 @@
+{% extends "layouts/dashboard.html" %} {% block title %} {% endblock %} {% block style %}
+<style>
+  .no-bg-border table,
+  .no-bg-border th,
+  .no-bg-border td {
+    border: 1px solid inherit; /* Inherit border color from the parent class */
+  }
+</style>
+{% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row justify="center">
+    <v-col cols="12" sm="12" md="12">
+      <v-card class="mx-auto px-10" variant="outlined">
+        <v-card-title>
+          <h1>Available Courses</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin">All courses available</h4>
+        </v-card-subtitle>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text>
+          <v-text-field
+            v-model="search"
+            label="Search"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            hide-details
+            single-line
+          ></v-text-field>
+
+          <v-data-table
+            class="no-bg-border bg-secondary"
+            :headers="headers"
+            :items="available_courses"
+            :search="search"
+            class="bg-title"
+          >
+            <template v-slot:item.register="{ item }">
+              <a
+                class="text-decoration-none"
+                color="title"
+                :href="`/available/elective/${item.id}`"
+              >
+                <v-btn icon="mdi-check" variant="tonal" color="ligth" size="small"> </v-btn>
+              </a>
+            </template>
+          </v-data-table>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const drawer = ref(null);
+
+  const app = createApp({
+    data() {
+      return {
+        drawer: null,
+        search: '',
+        headers: [
+          {key : "id", title: "id"},
+          {key : "course", title: "course"},
+          {key : "teacher", title: "teacher"},
+          {key : "capacity", title: "capacity"},
+          {key : "start_time", title: "start time"},
+          {key : "end_time", title: "end time"},
+          {key : "start_date", title: "start date"},
+          {key : "end_date", title: "end date"},
+          {key : "created_at", title: "created at"},
+          {key : "updated_at", title: "updated at"},
+          { text: 'register', value: 'register', sortable: false },
+        ],
+        available_courses : {{available_courses | tojson}},
+      };
+    },
+  });
+  app.use(vuetify);
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.mount('#app');
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('./../fonts/poppins/Poppins-Regular.ttf') format('truetype'),
+    url('./../fonts/poppins/Poppins-Black.ttf') format('truetype'),
+    url('./../fonts/poppins/OFL.txt') format('ttf')
+}
+
+* {
+  font-family: 'Poppins' !important
+}

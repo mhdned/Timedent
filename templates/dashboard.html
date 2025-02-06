@@ -1,0 +1,86 @@
+{% extends "layouts/dashboard.html" %} {% block title %} {% endblock %} {% block style %}
+<style></style>
+{% endblock %} {% block contents %}
+<v-container class="h-100 align-content-center">
+  <v-row justify="center">
+    <v-col cols="12" sm="12" md="6">
+      <v-card class="mx-auto px-10" variant="outlined">
+        <v-card-title>
+          <h1>Search Course</h1>
+        </v-card-title>
+        <v-card-subtitle>
+          <h4 class="text-primary font-weight-thin">please enter</h4>
+        </v-card-subtitle>
+        <v-spacer class="py-2"></v-spacer>
+        <v-card-text>
+          <v-form method="POST" action="/available/search">
+            <v-select
+              clearable
+              label="Courses"
+              name="course_id"
+              :items="courses"
+              item-title="subject"
+              item-value="id"
+              variant="outlined"
+            ></v-select>
+            <v-text-field
+              name="start_date"
+              label="Start Date"
+              variant="outlined"
+              type="date"
+            ></v-text-field>
+            <v-text-field
+              name="end_date"
+              label="End Date"
+              variant="outlined"
+              type="date"
+            ></v-text-field>
+            <v-text-field
+              name="start_time"
+              label="Start Time"
+              variant="outlined"
+              type="time"
+            ></v-text-field>
+            <v-text-field
+              name="end_time"
+              label="End Time"
+              variant="outlined"
+              type="time"
+            ></v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                type="submit"
+                min-width="120"
+                color="ligth"
+                size="large"
+                rounded="lg"
+                variant="outlined"
+                size="x-large"
+                >Search</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+{% endblock %} {% block scripts %}
+<script>
+  const { createApp, ref } = Vue;
+  const drawer = ref(null);
+
+  const app = createApp({
+    data() {
+      return {
+        drawer: null,
+        courses: {{courses | tojson}},
+      };
+    },
+  });
+  app.use(vuetify);
+  app.config.compilerOptions.delimiters = ['[[', ']]'];
+  app.mount('#app');
+</script>
+{% endblock %}

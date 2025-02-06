@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TimeDent {{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/lib/vuetify.min.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.4.47/css/materialdesignicons.css"
+    />
+    {% block style %} {% endblock %}
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-main class="bg-background">
+          <v-navigation-drawer v-model="drawer">
+            <v-row class="h-100" no-gutters>
+              <v-col align-self="start" cols="12">
+                <v-list>
+                  <v-list-item
+                    subtitle="{{admin_info.email}}"
+                    title="{{admin_info.username}}"
+                  ></v-list-item>
+                </v-list>
+
+                <v-divider></v-divider>
+
+                <v-list density="compact" nav>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard">
+                    <v-list-item
+                    prepend-icon="mdi-view-dashboard"
+                    title="Dashboard"
+                    value="dashboard"
+                    {% if page == "dashboard" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/users">
+                    <v-list-item
+                    prepend-icon="mdi-account-group"
+                    title="Users"
+                    value="users"
+                    {% if page == "users" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/teachers">
+                    <v-list-item
+                    prepend-icon="mdi-human-male-board"
+                    title="Teachers"
+                    value="teachers"
+                    {% if page == "teachers" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/courses">
+                    <v-list-item
+                    prepend-icon="mdi-book-open-page-variant-outline"
+                    title="Courses"
+                    value="courses"
+                    {% if page == "courses" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/fields">
+                    <v-list-item
+                    prepend-icon="mdi-account-school"
+                    title="Fields"
+                    value="fields"
+                    {% if page == "fields" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/available_courses">
+                    <v-list-item
+                    prepend-icon="mdi-school-outline"
+                    title="Available Courses"
+                    value="available_courses"
+                    {% if page == "available_courses" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/elective_courses">
+                    <v-list-item
+                    prepend-icon="mdi-book-education-outline"
+                    title="Elective Courses"
+                    value="elective_courses"
+                    {% if page == "elective_courses" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                  <a class="text-decoration-none text-text" href="/admin/dashboard/profile">
+                    <v-list-item
+                    prepend-icon="mdi-face-man-profile"
+                    title="Profile"
+                    value="profile"
+                    {% if page == "profile" %}
+                    class="bg-primary"
+                    {% endif %}
+                  ></v-list-item>
+                  </a>
+                </v-list>
+              </v-col>
+
+              <v-col align-self="end" cols="12" class="pb-4 justify-center text-center">
+                <v-divider class="py-2"></v-divider>
+                <v-chip variant="outlined"> version 1.0.0 </v-chip>
+              </v-col>
+            </v-row>
+          </v-navigation-drawer>
+
+          <v-app-bar elevation="0" class="border-b">
+            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-title>TimeDent</v-app-bar-title>
+            <template v-slot:append>
+              <v-btn icon="mdi-account-circle"></v-btn>
+            </template>
+          </v-app-bar>
+
+          <div> {% block contents %}{% endblock %} </div>
+        </v-main>
+      </v-app>
+    </div>
+    <script src="{{ url_for('static', path='/lib/vue.global.js') }}"></script>
+    <script src="{{ url_for('static', path='/lib/vuetify.min.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

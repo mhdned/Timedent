@@ -1,0 +1,4 @@
+https://cdn.jsdelivr.net/npm/vuetify@3.6.8/dist/vuetify.min.css
+https://cdn.jsdelivr.net/npm/vuetify@3.6.8/dist/vuetify.min.js
+https://unpkg.com/vue@3/dist/vue.global.js
+https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js
